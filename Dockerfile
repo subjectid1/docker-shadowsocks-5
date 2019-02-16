@@ -1,10 +1,11 @@
-FROM python:3.6
+FROM ubuntu:16.04
 
-# Install libsodium.
-RUN apt update && apt install libsodium18
-
-# Install latest shadowsocks.
-RUN pip install --no-cache-dir https://github.com/shadowsocks/shadowsocks/archive/master.zip
+# Install shadowsocks-libev.
+RUN apt-get update
+RUN apt-get install -y wget software-properties-common
+RUN add-apt-repository -y ppa:max-c-lv/shadowsocks-libev
+RUN apt-get update
+RUN apt install -y shadowsocks-libev
 
 # Download GoQuiet server and client binaries.
 RUN mkdir -p /opt/shadowsocks
@@ -17,8 +18,8 @@ VOLUME /opt/shadowsocks
 EXPOSE 443
 EXPOSE 1080
 
-ADD run-ssserver.sh /opt/shadowsocks/run-ssserver.sh
-ADD run-sslocal.sh /opt/shadowsocks/run-sslocal.sh
+ADD run-server.sh /opt/shadowsocks/run-server.sh
+ADD run-client.sh /opt/shadowsocks/run-client.sh
 
-CMD ["bash", "/opt/shadowsocks/run-ssserver.sh"]
+CMD ["bash", "/opt/shadowsocks/run-server.sh"]
 
