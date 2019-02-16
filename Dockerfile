@@ -1,6 +1,9 @@
 FROM python:3.6
 
-# Install latest shadowsocks which supports 'aes-256-gcm' method.
+# Install libsodium.
+RUN apt update && apt install libsodium18
+
+# Install latest shadowsocks.
 RUN pip install --no-cache-dir https://github.com/shadowsocks/shadowsocks/archive/master.zip
 
 # Download GoQuiet server and client binaries.
