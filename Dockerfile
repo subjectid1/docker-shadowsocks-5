@@ -16,7 +16,7 @@ RUN chmod +x /opt/shadowsocks/gq-client
 
 VOLUME /opt/shadowsocks
 EXPOSE 443
-EXPOSE 1080
+ 
 
 ADD run-server.sh /opt/shadowsocks/run-server.sh
 ADD run-client.sh /opt/shadowsocks/run-client.sh
